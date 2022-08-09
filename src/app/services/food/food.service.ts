@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Foods } from 'src/app/shared/models/food';
+import { Tag } from 'src/app/shared/models/tag';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,25 @@ import { Foods } from 'src/app/shared/models/food';
 export class FoodService {
   constructor() {}
 
-  getAll() : Foods[]{
+  getAllFoodByTag(tag: string): Foods[] {
+    return tag == 'All'
+      ? this.getAll()
+      : this.getAll().filter((food) => food.tags?.includes(tag));
+  }
+
+  getAllTag(): Tag[] {
+    return [
+      { name: 'All', count: 14 },
+      { name: 'FastFood', count: 4 },
+      { name: 'Pizza', count: 2 },
+      { name: 'Lunch', count: 3 },
+      { name: 'SlowFood', count: 2 },
+      { name: 'Hamburger', count: 1 },
+      { name: 'Fry', count: 1 },
+      { name: 'Soup', count: 1 },
+    ];
+  }
+  getAll(): Foods[] {
     return [
       {
         id: 1,
@@ -16,7 +35,7 @@ export class FoodService {
         cookTime: '20-30',
         favorite: true,
         origins: ['persia', 'middle east', 'china'],
-        star:4,
+        star: 4,
         imageUrl: '/assets/images/foods/food-1.jpg',
         tags: ['dlowFood', 'lunch'],
       },
@@ -27,7 +46,7 @@ export class FoodService {
         cookTime: '20-30',
         favorite: true,
         origins: ['france', 'japan', 'phillippens'],
-        star:3.9,
+        star: 3.9,
         imageUrl: '/assets/images/foods/food-2.jpg',
         tags: ['sandwich', 'fastfood'],
       },
@@ -38,7 +57,7 @@ export class FoodService {
         cookTime: '20-30',
         favorite: true,
         origins: ['mexico', 'middle east', 'china'],
-        star:4.2,
+        star: 4.2,
         imageUrl: '/assets/images/foods/food-3.jpg',
         tags: ['salad', 'healthy'],
       },
@@ -49,7 +68,7 @@ export class FoodService {
         cookTime: '30-50',
         favorite: false,
         origins: ['italy'],
-        star:4,
+        star: 4,
         imageUrl: '/assets/images/foods/food-4.jpg',
         tags: ['pasta', 'spaghetti'],
       },
@@ -60,7 +79,7 @@ export class FoodService {
         cookTime: '5-10',
         favorite: true,
         origins: ['french', 'belgium'],
-        star:3.9,
+        star: 3.9,
         imageUrl: '/assets/images/foods/food-5.jpg',
         tags: ['fries', 'potato'],
       },
@@ -71,7 +90,7 @@ export class FoodService {
         cookTime: '5-10',
         favorite: false,
         origins: ['french'],
-        star:4.2,
+        star: 4.2,
         imageUrl: '/assets/images/foods/food-6.jpg',
         tags: ['breakfast', 'fruits'],
       },
